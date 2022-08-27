@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "db:seed": "npx prisma db seed",
+    "db:reset": "NODE_ENV=development npx prisma migrate reset",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
