@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@auth0/nextjs-auth0": "^1.9.1",
     "@prisma/client": "^4.2.1",
     "apollo-server-micro": "^3.10.2",
     "graphql": "^16.6.0",
