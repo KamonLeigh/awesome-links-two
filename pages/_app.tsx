@@ -1,6 +1,6 @@
+import { UserProvider } from '@auth0/nextjs-auth0';
 import '../styles/globals.css'
 import Layout   from "../components/Layout";
-import { UserProvider } from '@auth0/nextjs-auth0';
 import type { AppProps } from 'next/app';
 import { ApolloProvider } from '@apollo/client';
 import apolloClient from "../lib/apollo";
