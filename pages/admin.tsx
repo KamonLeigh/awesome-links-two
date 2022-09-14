@@ -131,7 +131,31 @@ export const getServerSideProps = async({ req, res}) => {
         }  
     }
 
+    const user = await prisma.user.findUnique({
+        select: {
+            email: true,
+            role: true
+        },
+        where: {
+            email: session.user.email
+        }
+    })
+
+    if (user.role !== 'ADMIN') {
+        return {
+            redirect: {
+                permanent: false,
+                destination: '/404'
+            },
+            props: {
+
+            }
+        }
+    }
+
     return {
         props: {}
     }
 }
+
+export default Admin
