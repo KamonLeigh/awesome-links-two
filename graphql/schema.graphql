@@ -27,6 +27,7 @@ type PageInfo {
 }
 
 type Query {
+  link(id: String!): Link!
   links(after: String, first: Int): Response
 }
 

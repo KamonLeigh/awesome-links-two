@@ -45,15 +45,19 @@ function Home() {
       </Head>
       <div className="container mx-auto max-w-5xl my-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {data?.links.edges.map(({ node }) => (
-            <AwesomeLink
-              title={node.title}
-              category={node.category}
-              url={node.url}
-              id={node.id}
-              description={node.description}
-              imageUrl={node.imageUrl}
-            />
+          {data?.links.edges.map(({ node }, i) => (
+            <Link key={i} href={`/link/${node.id}`}>
+              <a>
+              <AwesomeLink
+                title={node.title}
+                category={node.category}
+                url={node.url}
+                id={node.id}
+                description={node.description}
+                imageUrl={node.imageUrl}
+              />
+              </a>
+            </Link>
           ))}
         </div>
         {hasNextPage ? (

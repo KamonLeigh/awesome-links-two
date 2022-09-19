@@ -57,6 +57,26 @@ export const Response = objectType({
 })
 
 
+export const LinksByIDQuery = extendType({
+    type: 'Query',
+    definition(t) {
+        t.nonNull.field('link', {
+            type: 'Link',
+            args: { id: nonNull(stringArg())
+            },
+            async resolve(_, args, ctx) {
+                const link = ctx.prisma.link.findUnique({
+                    where: {
+                        id: args.id
+                    }
+                })
+            }
+        })
+
+    
+    },
+})
+
 export const LinksQuery = extendType({
     type: 'Query',
     definition(t) {
