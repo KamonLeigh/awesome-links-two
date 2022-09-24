@@ -3,17 +3,17 @@ import { gql, useQuery } from '@apollo/client'
 
 const BookmarksQuery = gql`
     query {
-        bookmarks {
-            title
-            id
-            url
-            imageUrl
-            description
-            category
+         bookmarks {
+        title
+        url
+        imageUrl
+        category
+        description
         }
     }
+    
 `
-
+ 
 const Bookmarks = () => {
     const { data, error, loading } = useQuery(BookmarksQuery);
 
@@ -28,7 +28,7 @@ const Bookmarks = () => {
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
                     {data.bookmarks.length === 0 ? (
                         <p>
-                            You haven't bookmarked any links yet 👀
+                            You haven\'t bookmarked any links yet 👀
                         </p>
                     ) : (
                         data.bookmarks.map((link) => (

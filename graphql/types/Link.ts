@@ -1,4 +1,5 @@
 import { objectType, extendType, intArg, stringArg, nonNull  } from "nexus";
+import { type } from "os";
 import { resolve } from "path";
 
 import { User } from "./User";
@@ -88,6 +89,7 @@ export const LinksQuery = extendType({
             },
             async resolve(_, args, ctx) {
                 let queryResults = null
+                console.log('running')
 
                 if (args.after) {
                     // check id there is a cursor as the argument
@@ -195,6 +197,89 @@ export const CreateLinkMutation = extendType({
                     data: newLink
                 })
            }
+        })
+    },
+})
+
+const UpdateLink = extendType({
+    type: 'Mutation',
+    definition(t) {
+        t.nonNull.field('UpdateLink', {
+            type: Link,
+            args: {
+                id: nonNull(stringArg()),
+                title: stringArg(),
+                url: stringArg(),
+                imageUrl: stringArg(),
+                category: stringArg(),
+                description:stringArg()
+            },
+            async resolve(_parent, args, ctx){
+
+                if (!ctx.user) {
+                    throw new Error("You need to be logged in to perform action");
+                    
+                }
+
+                const user = await ctx.prisma.user.findUnique({
+                    where: {
+                        email: ctx.user.email
+                    }
+                })
+
+                if (user.role !== 'ADMIN') {
+                    throw new Error("You are unable to perform this action");
+                    
+                }
+
+                return await ctx.prisma.link.update({
+                    where: {
+                        id: args.id
+                    },
+                    data: {
+                        title: args.title,
+                        url: args.url,
+                        imageUrl: args.imageUrl,
+                        category: args.category,
+                        description: args.description
+                    }
+                })
+            }
+        })
+    },
+})
+
+const DeleteLink = extendType({
+    type: 'Mutation',
+    definition(t) {
+        t.nonNull.field('DeleteLink',{
+            type: Link,
+            args: {
+                id: nonNull(stringArg())
+            },
+            async resolve(_parent, args, ctx) {
+
+                if (!ctx.user) {
+                    throw new Error("You need to be logged in!!!");
+                    
+                }
+
+                const user = await ctx.prisma.user.findUnique({
+                    where: {
+                        email: ctx.user.email
+                    }
+                })
+
+                if (user.role !== 'ADMIN') {
+                    throw new Error("You are unable to perform this action")
+                }
+
+                return ctx.prisma.user.delete({
+                    where: {
+                        id: args.id
+                    }
+                })
+            }
         })
     },
 })
