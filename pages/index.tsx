@@ -3,6 +3,7 @@ import Head from "next/head";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import Link from "next/link";
 import { AwesomeLink } from "../components/AwesomeLink";
+import { motion } from 'framer-motion'
 
 const AllLinksQuery = gql`
   query allLinksQuery($first: Int, $after: String) {
@@ -47,7 +48,18 @@ function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {data?.links.edges.map(({ node }, i) => (
             <Link key={i} href={`/link/${node.id}`}>
-              <a>
+              <motion.a
+                whileHover={{
+                  position: 'relative',
+                  zIndex: 1,
+                  background: 'white',
+                  scale:1.2,
+                  transition: {
+                    delay:1,
+                    duration: 2
+                  }
+                }}
+              >
               <AwesomeLink
                 title={node.title}
                 category={node.category}
@@ -56,7 +68,7 @@ function Home() {
                 description={node.description}
                 imageUrl={node.imageUrl}
               />
-              </a>
+              </motion.a>
             </Link>
           ))}
         </div>

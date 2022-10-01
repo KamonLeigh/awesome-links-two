@@ -249,16 +249,17 @@ const UpdateLink = extendType({
     },
 })
 
-const DeleteLink = extendType({
+export const DeleteLink = extendType({
     type: 'Mutation',
     definition(t) {
-        t.nonNull.field('DeleteLink',{
+        t.nonNull.field('deleteLink',{
             type: Link,
             args: {
                 id: nonNull(stringArg())
             },
             async resolve(_parent, args, ctx) {
 
+                console.log('xxxx')
                 if (!ctx.user) {
                     throw new Error("You need to be logged in!!!");
                     
@@ -274,11 +275,13 @@ const DeleteLink = extendType({
                     throw new Error("You are unable to perform this action")
                 }
 
-                return ctx.prisma.user.delete({
+
+                return ctx.prisma.link.delete({
                     where: {
                         id: args.id
                     }
                 })
+                
             }
         })
     },
