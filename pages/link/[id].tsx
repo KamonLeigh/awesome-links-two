@@ -58,13 +58,21 @@ const Link = ({ link }) => {
         setLoadingTwo(false)
         router.push("/")
     }
+    
+    if(!link) return ( 
+      <div className="container text-center">
+        <p className="text-2xl text-red-500">Link doesn't exist 😥</p> 
+      </div>
+      )
 
     return (
         <div>
+           
+          
             <div className="prose container mx-auto px-8">
                 <Toaster/>
               <Head>
-                <title>{link.title}</title>
+                <title>{link.title ?link.title : 'No Link' }</title>
               </Head>
         
         <button
