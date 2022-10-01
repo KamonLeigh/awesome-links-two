@@ -3,6 +3,7 @@ import { gql, useMutation } from "@apollo/client";
 import toast, { Toaster } from "react-hot-toast";
 import { getSession } from "@auth0/nextjs-auth0";
 import prisma from "../lib/prisma";
+import Head from 'next/head'
 
 
 const CreateLinkMutation = gql`
@@ -76,6 +77,9 @@ const Admin = () => {
     return (
         <div className="container mx-auto max-w-md py-12">
             <Toaster/>
+            <Head>
+                <title>Create Link 🎉</title>
+            </Head>
             <h1 className="text-3xl font-medium my-5">Create a new Link</h1>
             <form className="grid grid-cols-1 gap-y-6 shadow-lg p-8 rounded-lg" onSubmit={handleSubmit(onSubmit)}>
                 <label className="block">

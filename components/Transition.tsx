@@ -33,7 +33,7 @@ const Transition = ({ children }: Props) => {
         <div className="overflow-hidden">
             <AnimatePresence
                 initial={false}
-                exitBeforeEnter
+                mode='wait'
                 >
                 <motion.div
                     key={asPath}

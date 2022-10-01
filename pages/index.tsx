@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AwesomeLink } from "../components/AwesomeLink";
 import { motion } from 'framer-motion'
 
+
 const AllLinksQuery = gql`
   query allLinksQuery($first: Int, $after: String) {
     links(first: $first, after: $after) {
