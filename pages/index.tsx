@@ -53,10 +53,10 @@ function Home() {
                   position: 'relative',
                   zIndex: 1,
                   background: 'white',
-                  scale:1.2,
-                  transition: {
+                  scale:1.1,
+                  transition: { 
                     delay:1,
-                    duration: 2
+                    duration: 1.5
                   }
                 }}
               >
