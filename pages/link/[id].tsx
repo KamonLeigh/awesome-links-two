@@ -66,10 +66,10 @@ const Link = ({ link }) => {
               <Head>
                 <title>{link.title}</title>
               </Head>
-
+        
         <button
           onClick={() => bookmark()}
-          className="my-4 capitalize bg-blue-500 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-600"
+          className="my-4 capitalize bg-blue-500 text-white font-medium py-2 px-4 mr-2 rounded-md hover:bg-blue-600"
         >
           {isLoading ? (
             <span className="flex items-center justify-center">
@@ -107,8 +107,8 @@ const Link = ({ link }) => {
             <span>Delete</span>
           )}
         </button>
-                <h1>{link.title}</h1>
-                <img src={link.imageUrl} className="shadow-lg rounded-lg"/>
+                <h1 className="tracking-wide mb-2 mt-16 text-xl">{link.title}</h1>
+                <img src={link.imageUrl} className="shadow-lg rounded-lg mb-16"/>
                 <p>{link.description}</p>
                 <a className="text-blue-500" href={`${link.url}`}>
                     {link.url}
