@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { gql, useQuery, useMutation } from "@apollo/client"
 import prisma from "../../lib/prisma";
 import { useRouter } from "next/router";
+import Head from 'next/head';
 
 const BookmarkQuery = gql`
     mutation bookmarkLink($id: String!) {
@@ -62,6 +63,10 @@ const Link = ({ link }) => {
         <div>
             <div className="prose container mx-auto px-8">
                 <Toaster/>
+              <Head>
+                <title>{link.title}</title>
+              </Head>
+
         <button
           onClick={() => bookmark()}
           className="my-4 capitalize bg-blue-500 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-600"

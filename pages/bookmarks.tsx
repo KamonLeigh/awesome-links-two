@@ -1,5 +1,6 @@
 import { AwesomeLink} from '../components/AwesomeLink'
 import { gql, useQuery } from '@apollo/client'
+import Head from 'next/head'
 
 const BookmarksQuery = gql`
     query {
@@ -21,6 +22,11 @@ const Bookmarks = () => {
 
     return (
         <div className='mx-auto my-20 max-w-5xl px-10'>
+            <Head>
+                <title>My Bookmarks</title>
+                <meta charSet="utf-8" />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <h1 className='text-3xl font-medium my-5'>My Bookmarks</h1>
             {loading ? (
                 <p>Loading...</p>
