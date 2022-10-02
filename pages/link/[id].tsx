@@ -5,6 +5,7 @@ import { gql, useQuery, useMutation } from "@apollo/client"
 import prisma from "../../lib/prisma";
 import { useRouter } from "next/router";
 import Head from 'next/head';
+import NoItems from "../../components/NoItems";
 
 const BookmarkQuery = gql`
     mutation bookmarkLink($id: String!) {
@@ -59,11 +60,7 @@ const Link = ({ link }) => {
         router.push("/")
     }
     
-    if(!link) return ( 
-      <div className="container text-center">
-        <p className="text-2xl text-red-500">Link doesn't exist 😥</p> 
-      </div>
-      )
+    if(!link) return  <NoItems message="Link doesn't exist 😥" className="text-red-500"/>
 
     return (
         <div>
