@@ -1,5 +1,5 @@
 // /graphql/types/User.ts
-import { enumType, objectType, extendType, stringArg, list } from 'nexus'
+import { enumType, objectType, extendType, stringArg, list, nonNull } from 'nexus'
 import { Link } from './Link'
 
 export const User = objectType({
@@ -93,6 +93,45 @@ export const BookmarkLink = extendType({
           }
         )
         return link
+      }
+    })
+  },
+})
+
+export const UpgradeUserAdmin = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.field('UpgradeUserAdmin',{
+      type: 'User',
+      args: {
+        email: nonNull(stringArg())
+      },
+      async resolve(_parent, args, ctx) {
+
+        const user = await ctx.prisma.user.findUnique({
+          where: {
+            email : ctx.user.email
+          },
+          select : {
+            role: true
+          }
+        })
+
+        if (!user) throw new Error('Invalid user');
+
+        if (user.role !== 'ADMIN') {
+          throw new Error("You are unable to perform this action");
+        }
+
+        return await ctx.prisma.user.update({
+          where: {
+            email: args.email
+          },
+            data: {
+              role: 'ADMIN'
+            }
+        })
+
       }
     })
   },

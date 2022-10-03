@@ -3,6 +3,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 
 const Header = () => {
   const { user } = useUser()
+  console.log(user);
   return (
     <header className="text-gray-600 body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
