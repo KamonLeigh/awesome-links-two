@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { getSession } from "@auth0/nextjs-auth0";
 import prisma from "../lib/prisma";
 import Head from 'next/head'
+import Link from 'next/link'
 
 
 const CreateLinkMutation = gql`
@@ -154,6 +155,11 @@ const Admin = () => {
             )}
         </button>
         </form>
+        <div className="mt-8">
+            <Link href='/updateadmin'>
+                    <a className="text-blue-500">Update User to Admin</a>
+                </Link>
+        </div>
         </div>
     )
 }

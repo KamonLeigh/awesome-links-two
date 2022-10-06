@@ -2,6 +2,7 @@ import { AwesomeLink} from '../components/AwesomeLink'
 import { gql, useQuery } from '@apollo/client'
 import NoItems from '../components/NoItems'
 import Head from 'next/head'
+import Link from 'next/link'
 
 const BookmarksQuery = gql`
     query {
@@ -51,7 +52,6 @@ const Bookmarks = () => {
                     )}
                 </div>
             )}
-
         </div>
     )
 

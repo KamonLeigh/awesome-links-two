@@ -6,6 +6,7 @@ import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/dist/server/api-utils";
 import { useMutation, gql } from "@apollo/client";
 import { useForm } from "react-hook-form";
+import Link from 'next/link'
 
 const UpgradeUserAdmin = gql`
     mutation($email:String!) {
@@ -23,6 +24,22 @@ function UpdateAdminUser():JSX.Element {
     const [updateUser, { loading, error}] = useMutation(UpgradeUserAdmin, {
         onCompleted: () => reset()
     })
+
+    const onSubmit = async data => {
+        const { email } = data
+        const variables = { email };
+
+        try {
+            toast.promise(updateUser({variables}),{
+                loading: 'Updating user...',
+                success: 'User successfully updated!🎉',
+                error: `Something went wrong 😥 Please try again -  ${error}`,
+            })
+            
+        } catch (error) {
+            console.error(error)
+        }
+    }
     return (
        <div className="container mx-auto max-w-md py-12">
             <Toaster/>
@@ -30,7 +47,7 @@ function UpdateAdminUser():JSX.Element {
                 <title>Upgrate user!!!</title>
             </Head>
             <h1 className="text-3xl font-medium my-5">Update User</h1>
-            <form className="grid grid-cols-1 gap-y-6 shadow-lg p-8 rounded-lg">
+            <form className="grid grid-cols-1 gap-y-6 shadow-lg p-8 rounded-lg" onSubmit={handleSubmit(onSubmit)}>
                 <label className="block">
                     <span className="text-gray-700">Email</span>
                     <input
@@ -64,7 +81,7 @@ function UpdateAdminUser():JSX.Element {
             )}
         </button>
             </form>
-
+            
        </div>
     )
 }
@@ -74,7 +91,7 @@ export default UpdateAdminUser;
 export const getServerSideProps = async ({ req, res}) => {
     const session = getSession(req, res)
 
-    if (session) {
+    if (!session) {
         return {
             redirect: {
                 permanent: false,
