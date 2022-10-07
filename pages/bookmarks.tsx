@@ -20,7 +20,7 @@ const BookmarksQuery = gql`
 const Bookmarks = () => {
     const { data, error, loading } = useQuery(BookmarksQuery);
 
-    if (error) return <p> Oops! Something has gone wrong { error }</p>
+    if (error) return (<p> Oops! Something has gone wrong {error?.message}</p>)
 
     return (
         <div className='mx-auto my-20 max-w-5xl px-10'>

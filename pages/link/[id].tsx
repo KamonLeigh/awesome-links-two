@@ -114,7 +114,7 @@ const Link = ({ link }) => {
           )}
         </button>
                 <h1 className="tracking-wide mb-2 mt-16 text-xl">{link.title}</h1>
-                <img src={link.imageUrl} alt={`${link.title} web page picture`} layout="fill" className="shadow-lg rounded-lg mb-16"/>
+                <img src={link.imageUrl} alt={`${link.title} web page picture`} className="shadow-lg rounded-lg mb-16"/>
                 <p>{link.description}</p>
                 <a className="text-blue-500" href={`${link.url}`}>
                     {link.url}
