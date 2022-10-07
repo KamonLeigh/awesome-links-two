@@ -6,8 +6,6 @@
     "db:seed": "npx prisma db seed",
     "db:reset": "NODE_ENV=development npx prisma migrate reset",
     "dev": "next dev -p 3001",
-    "vercel-build": "npm run prisma:migrate && next build",
-    "prisma:migrate": "DATABASE_URL=\"$MIGRATE_DATABASE_URL\" prisma migrate deploy",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
