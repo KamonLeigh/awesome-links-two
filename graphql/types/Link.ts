@@ -66,6 +66,7 @@ export const LinksByIDQuery = extendType({
             args: { id: nonNull(stringArg())
             },
             async resolve(_, args, ctx) {
+                console.log(process.env.MIGRATE_DATABASE_URL)
                 const link = ctx.prisma.link.findUnique({
                     where: {
                         id: args.id

@@ -37,8 +37,8 @@ export const BookmarkQuery = extendType({
     t.field('bookmarks',{
       type: list('Link'),
       async resolve(_parent, _args, ctx) {
-        console.log('running xxx')
-        console.log(ctx.user)
+       
+       
       
         const user = await ctx.prisma.user.findUnique({
           where: {
@@ -49,11 +49,11 @@ export const BookmarkQuery = extendType({
           }
         })
 
-      console.log(user)
+    
 
         if (!user) throw new Error('Invalid user');
 
-        console.log(user?.bookmarks)
+      
 
         return user.bookmarks
       }
@@ -77,7 +77,7 @@ export const BookmarkLink = extendType({
             id: args.id
           }
         })
-
+     
         await ctx.prisma.user.update(
           {
             where: {
