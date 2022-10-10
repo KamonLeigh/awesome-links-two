@@ -1,9 +1,12 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { relayStylePagination} from '@apollo/client/utilities'
+import { relayStylePagination} from '@apollo/client/utilities';
+import { production, development } from "./config";
 
-const uri = `${process.env.AUTH0_BASE_URL}/api/graphql`
+
+ //const uri = process.env.URI
+
 const apolloClient = new ApolloClient({
-    uri,
+    uri: process.env.NODE_ENV === 'development' ? development : production,
     cache: new InMemoryCache({
         typePolicies: {
             Query: {
